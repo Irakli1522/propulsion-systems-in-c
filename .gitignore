@@ -1,0 +1,11 @@
+*.o
+*.a
+*.so
+gmon.out
+*.gcov
+*.gcda
+*.gcno
+.DS_Store
+Thumbs.db
+.vscode/
+valgrind-out.txt
