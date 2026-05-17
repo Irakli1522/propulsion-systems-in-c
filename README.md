@@ -9,7 +9,7 @@ embedded systems, and real-time data acquisition.
 
 | # | Project | Domain | Status |
 |---|---------|--------|--------|
-| 01 | Mach & Atmosphere Calculator | Aeronautics / Space | 🔄 In Progress |
+| 01 | Mach & Atmosphere Calculator | Aeronautics / Space | 🔄 In Progress: Finish the Stage 7(User interactive experience)|
 | 02 | Brayton Cycle Analyser | Gas Turbines | ⬜ Not Started |
 | 03 | Telemetry Log Parser | Oil & Gas | ⬜ Not Started |
 | 04 | Compressor Map Library | Aircraft Engines | ⬜ Not Started |
