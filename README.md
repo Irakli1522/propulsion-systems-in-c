@@ -24,3 +24,17 @@ embedded systems, and real-time data acquisition.
 - Language: C (C11)
 - Compiler: gcc -Wall -Wextra -g -lm
 - OS: macOS / Linux
+
+
+## 01 · Mach & Atmosphere Calculator
+
+Computes ISA standard atmosphere properties and isentropic flow 
+conditions at any altitude and Mach number.
+
+**Computes:** temperature, pressure, density, speed of sound, 
+stagnation temperature T₀, stagnation pressure P₀, and flight regime.
+
+**Build:**
+```bash
+gcc -Wall -Wextra -g -lm main.c -o mach
+```
