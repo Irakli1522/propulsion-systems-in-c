@@ -38,3 +38,16 @@ stagnation temperature T₀, stagnation pressure P₀, and flight regime.
 ```bash
 gcc -Wall -Wextra -g -lm main.c -o mach
 ```
+
+
+## 02 · Brayton Cycle Analyser
+
+Models the thermodynamic cycle behind every jet engine and gas turbine.
+Computes all four cycle states, thermal efficiency, net work output,
+and back work ratio. Sweeps pressure ratios from 5 to 30 and writes
+results to CSV.
+
+**Build:**
+```bash
+gcc -Wall -Wextra -g -lm brayton.c -o brayton
+```
