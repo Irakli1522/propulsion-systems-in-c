@@ -35,17 +35,11 @@ void print_atmosphere_result(double altitude_m);
 void print_stagnation_result(double altitude_m, double mach);
 void print_regime(double mach);
 void print_atmosphere_table(double reference_velocity_ms);
+void user_input(void);
 
 int main(void)
 {
-    double speed_ms = speed_of_sound(TEST_TEMPERATURE_K);
-    double mach = mach_number(TEST_VELOCITY_MS, speed_ms);
-
-    print_mach_result(mach, speed_ms, TEST_VELOCITY_MS);
-    print_atmosphere_result(TEST_ALTITUDE_M);
-    print_stagnation_result(TEST_ALTITUDE_M, TEST_MACH);
-    print_regime(mach);
-    print_atmosphere_table(TEST_VELOCITY_MS);
+    user_input();
 
     return 0;
 }
@@ -221,4 +215,56 @@ void print_atmosphere_table(double reference_velocity_ms)
         printf("%8.0f  %7.2f  %10.1f  %11.4f  %8.2f  %6.3f  %-10s\n",
                alt, temperature_k, pressure_pa, density_kg_m3, speed_ms, mach, regime);
     }
+}
+
+void user_input(void)
+{
+    int running = 1;
+    char line[64];
+    double mach, altitude;
+
+    while (running)
+    {
+        printf("\nEnter Mach number (or -1 to exit): ");
+        if (fgets(line, sizeof(line), stdin) == NULL) {
+            break;
+        }
+
+        if (sscanf(line, "%lf", &mach) != 1 || mach < -1.0) {
+            printf("Invalid input. Please enter a valid Mach number or -1 to exit.\n");
+            continue;
+        }
+        if (mach < 0.0) {
+            running = 0;
+            break;
+        }
+        printf("Enter altitude in meters: ");
+        if (fgets(line, sizeof(line), stdin) == NULL) {
+            break;
+        }
+
+        if (sscanf(line, "%lf", &altitude) != 1) {
+            printf("Invalid input. Please enter a valid altitude in meters.\n");
+            continue;
+        }
+        if (altitude < 0.0 || altitude > TABLE_MAX_ALTITUDE_M) {
+            printf("Invalid input. Altitude is out of bounds.\n");
+            continue;
+        }
+
+        double T = isa_temperature(altitude);
+        double p = isa_pressure(altitude);
+        double rho = isa_density(p, T);
+        double a = speed_of_sound(T);
+        double v = mach * a;
+        double T0 = stagnation_temperature(T, mach);
+        double p0 = stagnation_pressure(p, mach);
+        print_mach_result(mach, a, v);
+        printf(" Alt: %.0f m, T: %.2f K, p: %.1f Pa, rho: %.4f kg/m3, T0: %.2f K, p0: %.1f Pa\n",
+               altitude, T, p, rho, T0, p0);
+        print_regime(mach);
+
+
+    }
+    printf("Exiting program. Goodbye!\n");
 }
