@@ -10,8 +10,8 @@ embedded systems, and real-time data acquisition.
 | # | Project | Domain | Status |
 |---|---------|--------|--------|
 | 01 | Mach & Atmosphere Calculator | Aeronautics / Space | ✅ Done |
-| 02 | Brayton Cycle Analyser | Gas Turbines | 🔄 In Progress |
-| 03 | Telemetry Log Parser | Oil & Gas | ⬜ Not Started |
+| 02 | Brayton Cycle Analyser | Gas Turbines | ✅ Done |
+| 03 | Telemetry Log Parser | Oil & Gas | 🔄 In Progress |
 | 04 | Compressor Map Library | Aircraft Engines | ⬜ Not Started |
 | 05 | Rocket Trajectory Simulator | Space Propulsion | ⬜ Not Started |
 | 06 | PID Engine Controller | Embedded / FADEC | ⬜ Not Started |
@@ -50,4 +50,21 @@ results to CSV.
 **Build:**
 ```bash
 gcc -Wall -Wextra -g -lm brayton.c -o brayton
+```
+
+## 03 · Telemetry Log Parser & Anomaly Detector
+
+Reads a CSV sensor log file from a turbine or engine test bench,
+parses every row into a dynamically allocated struct array, computes
+per-channel statistics, and flags readings that exceed safety thresholds.
+Writes a formatted anomaly report file.
+
+**Channels monitored:** temperature, pressure, vibration, RPM
+
+**Computes:** min, max, mean, RMS per channel. Anomaly count per channel.
+
+**Build:**
+```bash
+gcc -Wall -Wextra -g -lm telemetry.c -o parser
+./parser telemetry.csv
 ```
